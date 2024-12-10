@@ -1,20 +1,13 @@
 def read_map(file_path):
-    """
-    Reads the topographic map from a file and returns it as a 2D list of integers.
-    """
     with open(file_path, 'r') as f:
         return [list(map(int, line.strip())) for line in f.readlines()]
 
 def find_trailheads_and_ratings(topographic_map):
-    """
-    Finds all trailheads and calculates their ratings based on the number of distinct trails.
-    """
     rows = len(topographic_map)
     cols = len(topographic_map[0])
     directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]  # Right, Down, Left, Up
 
     def is_valid(x, y, current_height):
-        """Checks if a move to (x, y) is valid."""
         return (
             0 <= x < rows and
             0 <= y < cols and
@@ -22,9 +15,6 @@ def find_trailheads_and_ratings(topographic_map):
         )
 
     def dfs_count_paths(x, y, visited):
-        """
-        Performs DFS to count distinct paths from a given position to any '9'.
-        """
         if (x, y) in visited:
             return 0
         visited.add((x, y))
@@ -52,14 +42,13 @@ def find_trailheads_and_ratings(topographic_map):
     return trailheads_ratings
 
 def calculate_total_rating(file_path):
-    """
-    Calculates the total rating for all trailheads in the topographic map.
-    """
     topographic_map = read_map(file_path)
     trailheads_ratings = find_trailheads_and_ratings(topographic_map)
     return sum(trailheads_ratings)
 
 # File input (replace 'input.txt' with your actual input file path)
-input_file = 'input.txt'
+input_file = 'D:\GitHub\Advent of Code\Day_10\input.txt'
 total_rating = calculate_total_rating(input_file)
 print(f"Total rating of all trailheads: {total_rating}")
+
+#1974
